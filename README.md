@@ -1,1 +1,1 @@
-# my-repository
+# my-repository about the Vinted BACKEND
