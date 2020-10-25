@@ -71,20 +71,26 @@ router.post("/user/signup", async (req, res) => {
 
 // ROUTE LOG IN
 router.post("/user/login", async (req, res) => {
-  const usertofind = await User.findOne({ email: req.fields.email });
-  const password = req.fields.password;
+  try {
+    const usertofind = await User.findOne({ email: req.fields.email });
+    const password = req.fields.password;
 
-  const thisisthehash = SHA256(password + usertofind.salt).toString(encBase64);
+    const thisisthehash = SHA256(password + usertofind.salt).toString(
+      encBase64
+    );
 
-  if (usertofind.hash === thisisthehash) {
-    const reponse = {
-      id: usertofind.id,
-      token: usertofind.token,
-      account: usertofind.account,
-    };
-    res.status(200).json({ message: "You're now online", reponse });
-  } else {
-    res.status(400).json({ message: "something went wrong.." });
+    if (usertofind.hash === thisisthehash) {
+      const reponse = {
+        id: usertofind.id,
+        token: usertofind.token,
+        account: usertofind.account,
+      };
+      res.status(200).json({ message: "You're now online", reponse });
+    } else {
+      res.status(400).json({ message: "something went wrong.." });
+    }
+  } catch (error) {
+    console.error({ message: error });
   }
 });
 
