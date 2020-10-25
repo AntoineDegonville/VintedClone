@@ -65,7 +65,7 @@ router.post("/user/signup", async (req, res) => {
       res.status(200).json({ message: "Account created", answer });
     }
   } catch (error) {
-    console.error(error.message);
+    res.status(400).json({ message: "Ca marche pas.." });
   }
 });
 
