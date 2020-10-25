@@ -70,7 +70,7 @@ router.post("/offers/publish", isAuthenticated, async (req, res) => {
 });
 
 // ROUTE PUT (UPDATE AN OFFER)
-router.put("/offers/update", async (req, res) => {
+router.put("/offers/update", isAuthenticated, async (req, res) => {
   try {
     // récupération des infos(fields)
     const id = req.fields.id;
@@ -136,7 +136,7 @@ router.put("/offers/update", async (req, res) => {
 });
 
 // ROUTE DELETE (DELETE AN OFFER)
-router.delete("/offers/delete", async (req, res) => {
+router.delete("/offers/delete", isAuthenticated, async (req, res) => {
   try {
     // Récupération de l'id
     const id = req.fields.id;

@@ -3,7 +3,7 @@ const User = require("../models/User");
 const isAuthenticated = async (req, res, next) => {
   try {
     if (req.headers.authorization) {
-      let token = req.headers.authorization.replace("Bearer ", ""); // le token recu et modifié pour ne pas avoir le "Bearer " au début.
+      let token = req.headers.authorization.replace("Bearer ", ""); // le token recu
       const usertofind = await User.findOne({ token: token }).select(
         "account email token"
       ); // le user retrouvé grace au token
