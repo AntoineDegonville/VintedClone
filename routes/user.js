@@ -24,15 +24,16 @@ router.post("/user/signup", async (req, res) => {
     const emailtosearch = req.fields.email;
 
     const usertofind = await User.findOne({ email: emailtosearch });
-
-    // UPLOAD DE L'IMAGE AVEC L'ID DE LA NOUVELLE OFFRE.
-    let pictureToUpload = req.files.picture.path;
-    const result = await cloudinary.uploader.upload(pictureToUpload, {
-      folder: "/vinted/users",
-      public_id: username,
-    });
-    // AJOUT DES INFOS DE L'IMAGE DANS LA NOUVELLE OFFRE
-    const avatar = result;
+    if (req.files.picture) {
+      // UPLOAD DE L'IMAGE AVEC L'ID DE LA NOUVELLE OFFRE.
+      let pictureToUpload = req.files.picture.path;
+      const result = await cloudinary.uploader.upload(pictureToUpload, {
+        folder: "/vinted/users",
+        public_id: username,
+      });
+      // AJOUT DES INFOS DE L'IMAGE DANS LA NOUVELLE OFFRE
+      const avatar = result;
+    }
 
     if (usertofind) {
       res.status(400).json({ message: "Mail already exist" });
@@ -47,7 +48,6 @@ router.post("/user/signup", async (req, res) => {
         account: {
           phone,
           username,
-          avatar,
         },
       });
 
@@ -56,7 +56,6 @@ router.post("/user/signup", async (req, res) => {
         account: {
           phone,
           username,
-          avatar,
         },
       };
       console.log(newuser);
@@ -65,6 +64,7 @@ router.post("/user/signup", async (req, res) => {
       res.status(200).json({ message: "Account created", answer });
     }
   } catch (error) {
+    console.log(error.message);
     res.status(400).json({ message: "Ca marche pas.." });
   }
 });
