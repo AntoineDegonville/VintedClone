@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const cloudinary = require("cloudinary").v2;
 const app = express();
 app.use(formidableMiddleware());
+app.use(cors());
 
 // CONNECTION BDD USER
 mongoose.connect(process.env.MONGODB_URI, {
