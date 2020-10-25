@@ -12,14 +12,6 @@ app.use(isAuthenticated);
 //IMPORT DU MODEL
 const Offer = require("../models/Offer");
 
-// // CONNECTION A CLOUDINARY
-
-cloudinary.config({
-  cloud_name: "dta6lllnx",
-  api_key: 844219477713275,
-  api_secret: "aRT5h8UiDUnoSwLjw6FvtrBsJ8Y",
-});
-
 // ROUTE POST OFFER PUBLISH
 router.post("/offers/publish", isAuthenticated, async (req, res) => {
   try {
