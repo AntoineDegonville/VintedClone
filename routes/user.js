@@ -8,10 +8,6 @@ const cloudinary = require("cloudinary").v2;
 // IMPORT DU MODEL
 const User = require("../models/User");
 
-router.get("/", () => {
-  res.json({ message: "Hello" });
-});
-
 // ROUTE SIGNUP
 router.post("/user/signup", async (req, res) => {
   try {
